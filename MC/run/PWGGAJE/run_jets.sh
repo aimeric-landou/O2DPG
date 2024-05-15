@@ -12,8 +12,8 @@
 
 RNDSEED=${RNDSEED:-0}   # [default = 0] time-based random seed
 
-NSIGEVENTS=${NSIGEVENTS:-20}
-NTIMEFRAMES=${NTIMEFRAMES:-5}
+NSIGEVENTS=${NSIGEVENTS:-100}
+NTIMEFRAMES=${NTIMEFRAMES:-10}
 NWORKERS=${NWORKERS:-8}
 MODULES="--skipModules ZDC" #"PIPE ITS TPC EMCAL"
 CONFIG_ENERGY=${CONFIG_ENERGY:-13000.0}
@@ -43,7 +43,7 @@ ${O2DPG_ROOT}/MC/bin/o2dpg_sim_workflow.py -eCM ${CONFIG_ENERGY} -col pp -gen py
                                             -ptHatMin ${PTHATMIN} -ptHatMax ${PTHATMAX}            \
                                             -tf ${NTIMEFRAMES} -ns ${NSIGEVENTS} -e ${SIMENGINE}   \
                                             -j ${NWORKERS} -mod "--skipModules ZDC"                \
-                                            -weightPow ${WEIGHTPOW}
+                                            -weightPow ${WEIGHTPOW} -interactionRate 500000
 
 # run workflow
 ${O2DPG_ROOT}/MC/bin/o2_dpg_workflow_runner.py -f workflow.json
